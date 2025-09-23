@@ -3,9 +3,11 @@
 ## 1. Array dan Slice
 
 ### a. Array
+
 Array adalah kumpulan elemen dengan tipe data yang sama dan ukuran tetap. Ukuran array merupakan bagian dari tipenya, sehingga `[5]int` dan `[10]int` adalah tipe yang berbeda.
 
 Deklarasi dan inisialisasi:
+
 ```go
 // Deklarasi array dengan panjang 5, elemen default adalah 0
 var numbers [5]int
@@ -28,6 +30,7 @@ fmt.Println(len(fruits)) // Output: 3
 ```
 
 Iterasi array:
+
 ```go
 for i := 0; i < len(fruits); i++ {
 	fmt.Printf("Fruit %d: %s\n", i, fruits[i])
@@ -40,9 +43,11 @@ for index, value := range animals {
 ```
 
 ### b. Slice
+
 Slice adalah struktur data yang lebih dinamis dan fleksibel dibanding array. Slice merupakan reference ke bagian dari array. Slice tidak menyimpan data itu sendiri, melainkan mereferensikan elemen-elemen dari array lain.
 
 Membuat slice:
+
 ```go
 // Membuat slice dengan make
 slice1 := make([]int, 5) // Membuat slice dengan panjang 5, kapasitas 5
@@ -59,6 +64,7 @@ slice4 := []int{10, 20, 30}
 ```
 
 Operasi pada slice:
+
 ```go
 // Menambah elemen dengan append
 slice4 = append(slice4, 40)
@@ -76,10 +82,12 @@ fmt.Println(dst) // Output: [1 2 3]
 ```
 
 Perbedaan penting antara Array dan Slice:
+
 - Array memiliki ukuran tetap, sedangkan slice bisa berubah ukuran.
-- Saat mengirim array ke fungsi, itu adalah *pass by value* (copy seluruh array), sedangkan slice adalah *pass by reference* (hanya copy header slice-nya).
+- Saat mengirim array ke fungsi, itu adalah _pass by value_ (copy seluruh array), sedangkan slice adalah _pass by reference_ (hanya copy header slice-nya).
 
 Contoh:
+
 ```go
 func modifyArray(arr [3]int) {
 	arr[0] = 100 // Tidak mempengaruhi array asli
@@ -92,10 +100,10 @@ func modifySlice(slc []int) {
 func main() {
 	myArr := [3]int{1, 2, 3}
 	mySlice := []int{1, 2, 3}
-	
+
 	modifyArray(myArr)
 	fmt.Println(myArr) // Output: [1 2 3] (tidak berubah)
-	
+
 	modifySlice(mySlice)
 	fmt.Println(mySlice) // Output: [100 2 3] (berubah)
 }
@@ -103,9 +111,10 @@ func main() {
 
 ## 2. Map
 
-Map adalah koleksi key-value yang tidak terurut. Key harus memiliki tipe yang *comparable* (seperti string, int, bool), dan value bisa bertipe apa saja.
+Map adalah koleksi key-value yang tidak terurut. Key harus memiliki tipe yang _comparable_ (seperti string, int, bool), dan value bisa bertipe apa saja.
 
 Deklarasi dan inisialisasi:
+
 ```go
 // Membuat map kosong
 var ages map[string]int // Nil map, akan panic jika diakses sebelum dibuat dengan make
@@ -138,6 +147,7 @@ fmt.Println(ages) // Output: map[Alice:25]
 ```
 
 Iterasi map:
+
 ```go
 for subject, score := range scores {
 	fmt.Printf("%s: %d\n", subject, score)
@@ -149,6 +159,7 @@ for subject, score := range scores {
 Struct adalah tipe data komposit yang memungkinkan kita menggabungkan beberapa field (variabel) dalam satu kesatuan. Ini mirip dengan konsep "class" di bahasa pemrograman lain, namun Go tidak memiliki konsep class secara eksplisit.
 
 Deklarasi struct:
+
 ```go
 type Person struct {
 	Name string
@@ -163,6 +174,7 @@ type Rectangle struct {
 ```
 
 Membuat instance struct:
+
 ```go
 // Cara 1: Menggunakan literal
 person1 := Person{Name: "Alice", Age: 25, Email: "alice@example.com"}
@@ -183,6 +195,7 @@ fmt.Println(person1.Age) // Output: 26
 ```
 
 Nested struct:
+
 ```go
 type Address struct {
 	Street string
@@ -201,7 +214,7 @@ func main() {
 		AddressInfo: Address{Street: "123 Main St", City: "Gotham"},
 		Position: "Developer",
 	}
-	
+
 	fmt.Printf("Employee: %+v\n", emp)
 	fmt.Println("City:", emp.AddressInfo.City)
 }
@@ -209,9 +222,10 @@ func main() {
 
 ## 4. Method
 
-Method adalah fungsi yang memiliki *receiver*. Receiver adalah argumen yang mendefinisikan objek mana yang akan memanggil method tersebut. Ini memungkinkan kita untuk menetapkan perilaku ke struct (mirip dengan metode dalam class OOP).
+Method adalah fungsi yang memiliki _receiver_. Receiver adalah argumen yang mendefinisikan objek mana yang akan memanggil method tersebut. Ini memungkinkan kita untuk menetapkan perilaku ke struct (mirip dengan metode dalam class OOP).
 
 Mendefinisikan method:
+
 ```go
 // Method dengan receiver value
 func (p Person) Greet() string {
@@ -236,14 +250,14 @@ func (r *Rectangle) Scale(factor float64) {
 func main() {
 	person := Person{Name: "Eve", Age: 22, Email: "eve@example.com"}
 	fmt.Println(person.Greet()) // Memanggil method
-	
+
 	// Memanggil method dengan receiver pointer
 	person.SetAge(23)
 	fmt.Println("New age:", person.Age)
-	
+
 	rect := Rectangle{Width: 10, Height: 5}
 	fmt.Println("Area:", rect.Area()) // Output: 50
-	
+
 	// Scale rectangle
 	rect.Scale(2)
 	fmt.Println("Scaled area:", rect.Area()) // Output: 200
@@ -251,14 +265,16 @@ func main() {
 ```
 
 Perbedaan antara receiver value dan pointer:
-- Receiver value (`func (p Person) ...`): Membuat *copy* dari struct saat method dipanggil. Perubahan dalam method tidak mempengaruhi struct asli.
-- Receiver pointer (`func (p *Person) ...`): Menerima *pointer* ke struct. Perubahan dalam method mempengaruhi struct asli. Lebih efisien karena tidak perlu menyalin struct.
+
+- Receiver value (`func (p Person) ...`): Membuat _copy_ dari struct saat method dipanggil. Perubahan dalam method tidak mempengaruhi struct asli.
+- Receiver pointer (`func (p *Person) ...`): Menerima _pointer_ ke struct. Perubahan dalam method mempengaruhi struct asli. Lebih efisien karena tidak perlu menyalin struct.
 
 ## 5. Interface
 
-Interface adalah kumpulan definisi method (tanpa implementasi). Tipe apa pun yang memiliki semua method yang didefinisikan dalam interface secara otomatis mengimplementasikannya. Ini adalah cara Go menerapkan konsep *polymorphism*.
+Interface adalah kumpulan definisi method (tanpa implementasi). Tipe apa pun yang memiliki semua method yang didefinisikan dalam interface secara otomatis mengimplementasikannya. Ini adalah cara Go menerapkan konsep _polymorphism_.
 
 Mendefinisikan interface:
+
 ```go
 type Shape interface {
 	Area() float64
@@ -286,6 +302,7 @@ func (c Circle) Perimeter() float64 {
 ```
 
 Menggunakan interface:
+
 ```go
 import "math"
 
@@ -298,7 +315,7 @@ func PrintShapeInfo(s Shape) {
 func main() {
 	rect := Rectangle{Width: 10, Height: 5}
 	circ := Circle{Radius: 3}
-	
+
 	// Karena Rectangle dan Circle mengimplementasikan Shape,
 	// mereka bisa dikirim ke fungsi yang menerima Shape
 	PrintShapeInfo(rect)
@@ -322,4 +339,4 @@ func main() {
 }
 ```
 
-Namun, sejak Go 1.18, konsep *generics* telah diperkenalkan yang seringkali lebih disarankan daripada `interface{}` untuk fleksibilitas tipe yang aman.
+Namun, sejak Go 1.18, konsep _generics_ telah diperkenalkan yang seringkali lebih disarankan daripada `interface{}` untuk fleksibilitas tipe yang aman.

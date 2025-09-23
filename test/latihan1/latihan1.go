@@ -24,6 +24,8 @@ func main() {
 	} else {
 		fmt.Printf("Result: %d\n", result2)
 	}
+
+	
 }
 
 func sumVariadic(nums []int) (int, error) {
