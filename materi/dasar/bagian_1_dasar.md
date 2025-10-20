@@ -91,7 +91,7 @@ Ada beberapa cara untuk mendeklarasikan variabel di Go:
   - `float32`, `float64`: Bilangan desimal.
   - `complex64`, `complex128`: Bilangan kompleks.
 - **String:** Deretan karakter, dinyatakan dengan tanda kutip ganda (`"..."`) atau backticks (`` `...` ``) untuk raw string literal.
-- **Boolean:** `bool`, bernilai `true` atau `false`.
+- **Boolean:** `bool`, bernilai `true` atau `false`.4
 
 Contoh:
 ```go
