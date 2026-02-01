@@ -1,4 +1,4 @@
-# Bagian 2: Struktur Data dan Interface
+;lk;lk;lk;lk;lk;lk# Bagian 2: Struktur Data dan Interface
 
 ## 1. Array dan Slice
 

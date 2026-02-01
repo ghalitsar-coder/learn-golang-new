@@ -169,23 +169,34 @@ func main() {
 	
 	// Goroutine writer
 	go func() {
+		duration := time.Now()
+		
 		store.Write("name", "Alice")
 		store.Write("city", "New York")
+				elapsed:= time.Since(duration)
+		fmt.Printf("durasi WRITE %+v", elapsed.Round(time.Since(duration)))
 	}()
 	
 	// Goroutine readers
 	go func() {
+		duration := time.Now()
 		for i := 0; i < 3; i++ {
 			name := store.Read("name")
 			fmt.Printf("Reader 1 got name: %s\n", name)
 		}
+		elapsed:= time.Since(duration)
+		fmt.Printf("durasi READ 1 %+v", elapsed.Round(time.Since(duration)))
 	}()
 	
 	go func() {
+		duration := time.Now()
+
 		for i := 0; i < 3; i++ {
 			city := store.Read("city")
 			fmt.Printf("Reader 2 got city: %s\n", city)
 		}
+				elapsed:= time.Since(duration)
+		fmt.Printf("durasi %+v", elapsed.Round(time.Since(duration)))
 	}()
 	
 	time.Sleep(2 * time.Second)
